@@ -42,7 +42,8 @@ bowerDir = 'bower_components/' ;
 //coffeeSources = ['components/coffee/*.coffee'];
 jsSources = [
 	bowerDir + 'jquery/dist/jquery.js',
-	bowerDir + 'bootstrap-sass/assets/javascripts/bootstrap.js',	
+	bowerDir + 'bootstrap-sass/assets/javascripts/bootstrap.js',
+	bowerDir + 'underscore/underscore.js',		
 	'components/scripts/*.js'];
 sassSources = ['components/sass/main.scss'];
 htmlSources = [outputDir + '*.html'];
