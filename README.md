@@ -1,3 +1,3 @@
-# Tim's Gulp Workflow
+# jS Go 
 
-Template
+Javascript implementation of the classic game of Go.
