@@ -1,6 +1,6 @@
 var game = {
 
-  currentState: [];
+  currentState: [],
 
   init: function(size) {
     game.currentState = game.initialState(size);
@@ -31,7 +31,9 @@ var game = {
     }
   },
 
-  
+  updateCurrentState: function(x,y,colour) {
+    game.currentState[x][y] = colour;
+  }
 
 
 }
