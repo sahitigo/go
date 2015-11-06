@@ -13149,9 +13149,17 @@ $(document).ready(function() {
 
 
 $(document).ready(function(){
-  console.log("Hello");
+  var black = true;
+  // console.log("Hello");
   $(".item").click(function(){
-    console.log("Hello click");
-    $(this).append("<div class='white-marble'></div>");
+    // console.log("Hello click");
+    if(black){
+      $(this).append("<div class='black-marble'></div>");
+      black = false;
+    }
+    else{
+      $(this).append("<div class='white-marble'></div>");
+      black = true;
+    }
   });
 });
