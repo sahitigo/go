@@ -7,8 +7,9 @@ $(document).ready(function(){
       var str1 = "<div class='item' data-position=";
       var str2 = "></div>";
       var str3 = " key=";
+      var str4 = " data-content='.'";
       var key = i + "_" + j;
-      var divData = str1 + key + str3 + key + str2;
+      var divData = str1 + key + str3 + key + str4 + str2;
       // console.log(divData);
       divCnt += divData;
     };
@@ -27,10 +28,12 @@ $(document).ready(function(){
     // console.log("Hello click");
     if(black){
       $(this).append("<div class='black-marble'></div>");
+      $(this).attr('data-content', 'b');
       black = false;
     }
     else{
       $(this).append("<div class='white-marble'></div>");
+      $(this).attr('data-content', 'w');
       black = true;
     }
   });
