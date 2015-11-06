@@ -26,7 +26,7 @@ var game = {
       for (var j = 1; j <= gridSize; j++) {
         var str1 = "<div class='item' data-position=";
         var str2 = "></div>";
-        var str3 = " key=";
+        var str3 = " id=";
         var str4 = " data-content='.'";
         var key = i + "_" + j;
         var divData = str1 + key + str3 + key + str4 + str2;
@@ -56,9 +56,10 @@ var game = {
     if (shapes.one.length + shapes.two.length + shapes.three.length + shapes.four.length !== 0) {
             var shapesToDelete = game.findNecklaces(shapes);
 
-            if (shapesToDelete !== []) {
-              for (var shape in shapesToDelete) {
-                game.deleteShape(shapes[shape]);
+            if (shapesToDelete.length > 0) {
+              for (i=0; i < shapesToDelete.length; i++) {
+                
+                game.deleteShape(shapes[shapesToDelete[i]]);
               };      
             };
     };
@@ -68,34 +69,43 @@ var game = {
     game.currentState[x][y] = newContent;
   },
 
-  findShapes: function(x,y,colour,shapes,shape) {
+  findShapes: function(x,y,colour,shape) {
     //var origin = [x][y];
+
+    var maxPos = game.currentState.length - 1;
     
     var shapeCrawler = function(x,y,colour,shape) {
-      if (game.currentState[x+1][y] === colour) {
+
+      
+      
+      if (x < maxPos && game.currentState[x+1][y] === colour) {
         x++;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x][y+1] === colour) {
+      if (y < maxPos && game.currentState[x][y+1] === colour) {
         y++;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x-1][y] === colour) {
+      if (x > 0 && game.currentState[x-1][y] === colour) {
         x--;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x][y-1] === colour) {
+      if (y > 0 && game.currentState[x][y-1] === colour) {
         y--;
         shapePush(x,y,colour,shape);
       };
     }
 
     var shapePush = function (x,y,colour,shape) {
-      shapes[shape].push(x + "_" + y);
-      game.findShapes(x,y,colour,shape);
+      debugger;
+      var pos = x + "_" + y;
+      if (shapes[shape].indexOf(pos) === -1) {
+        shapes[shape].push(pos);
+        shapeCrawler(x,y,colour,shape);
+      };
     }
 
     if (typeof shape === 'undefined') {
@@ -110,24 +120,23 @@ var game = {
         four: []
       }
     };
-
     
-    if (game.currentState[x+1][y] === colour) {
+    if (x < maxPos && game.currentState[x+1][y] === colour) {
       x++;
       shapePush(x,y,colour,"one");
     };
 
-    if (game.currentState[x][y+1] === colour) {
+    if (y < maxPos && game.currentState[x][y+1] === colour) {
       y++;
       shapePush(x,y,colour,"two");
     };
 
-    if (game.currentState[x-1][y] === colour) {
+    if (x > 0 && game.currentState[x-1][y] === colour) {
       x--;
       shapePush(x,y,colour,"three");
     };
 
-    if (game.currentState[x][y-1] === colour) {
+    if (y > 0 && game.currentState[x][y-1] === colour) {
       y--;
       shapePush(x,y,colour,"four");
     };
@@ -144,7 +153,8 @@ var game = {
           two: [],
           three: [],
           four: []
-        };
+        },
+        maxPos = game.currentState.length - 1;
 
     var processLiberties = function(position, shape) {
 
@@ -152,19 +162,19 @@ var game = {
       var y = Number(position[1]);
 
 
-      if (game.currentState[x+1][y] === ".") {
+      if (x < maxPos && game.currentState[x+1][y] === ".") {
         necklaces[shape].push(x+1 + "_" + y)
       };
 
-      if (game.currentState[x][y+1] === ".") {
+      if (y < maxPos && game.currentState[x][y+1] === ".") {
         necklaces[shape].push(x + "_" + (y+1))
       };
 
-      if (game.currentState[x-1][y] === ".") {
+      if (x > 0 && game.currentState[x-1][y] === ".") {
         necklaces[shape].push(x-1 + "_" + y)
       };
 
-      if (game.currentState[x][y-1] === ".") {
+      if (y > 0 && game.currentState[x][y-1] === ".") {
         necklaces[shape].push(x + "_" + (y-1))
       };
 
@@ -197,6 +207,9 @@ var game = {
     for (var i = 0; i < shape.length; i++) {
       var pos = shape[i].split("_");
       game.updateCurrentState(pos[0],pos[1],".");
+      var id = "#" + (Number(pos[0])+1) + "_" + (Number(pos[1])+1);
+      console.log(id);
+      $(id).html("");
     };
   }
 
