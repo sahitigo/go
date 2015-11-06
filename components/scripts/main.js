@@ -69,10 +69,11 @@ var game = {
     game.currentState[x][y] = newContent;
   },
 
-  findShapes: function(x,y,colour,shapes,shape) {
+  findShapes: function(x,y,colour,shape) {
     //var origin = [x][y];
     
     var shapeCrawler = function(x,y,colour,shape) {
+      
       if (game.currentState[x+1][y] === colour) {
         x++;
         shapePush(x,y,colour,shape);
@@ -95,8 +96,12 @@ var game = {
     }
 
     var shapePush = function (x,y,colour,shape) {
-      shapes[shape].push(x + "_" + y);
-      game.findShapes(x,y,colour,shape);
+      debugger;
+      var pos = x + "_" + y;
+      if (shapes[shape].indexOf(pos) === -1) {
+        shapes[shape].push(pos);
+        shapeCrawler(x,y,colour,shape);
+      };
     }
 
     if (typeof shape === 'undefined') {
@@ -116,21 +121,25 @@ var game = {
     if (game.currentState[x+1][y] === colour) {
       x++;
       shapePush(x,y,colour,"one");
+      //shapeCrawler(x,y,colour,"one");
     };
 
     if (game.currentState[x][y+1] === colour) {
       y++;
       shapePush(x,y,colour,"two");
+      //shapeCrawler(x,y,colour,"two");
     };
 
     if (game.currentState[x-1][y] === colour) {
       x--;
       shapePush(x,y,colour,"three");
+      //shapeCrawler(x,y,colour,"three");
     };
 
     if (game.currentState[x][y-1] === colour) {
       y--;
       shapePush(x,y,colour,"four");
+      //shapeCrawler(x,y,colour,"four");
     };
     
     return shapes;
