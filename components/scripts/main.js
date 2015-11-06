@@ -51,14 +51,16 @@ var game = {
     }
 
     var shapes = game.findShapes(x,y,colourToFind);
+    //debugger;
     
-    if (shapes) {
-      var shapesToDelete = game.findNecklaces(shapes);
-      if (shapesToDelete !== []) {
-        for (var shape in shapesToDelete) {
-          game.deleteShape(shapes[shape]);
-        };      
-      };
+    if (shapes.one.length + shapes.two.length + shapes.three.length + shapes.four.length !== 0) {
+            var shapesToDelete = game.findNecklaces(shapes);
+
+            if (shapesToDelete !== []) {
+              for (var shape in shapesToDelete) {
+                game.deleteShape(shapes[shape]);
+              };      
+            };
     };
   },
 
@@ -66,16 +68,38 @@ var game = {
     game.currentState[x][y] = newContent;
   },
 
-  findShapes: function(x,y,colour,shape) {
+  findShapes: function(x,y,colour,shapes,shape) {
     //var origin = [x][y];
+    
+    var shapeCrawler = function(x,y,colour,shape) {
+      if (game.currentState[x+1][y] === colour) {
+        x++;
+        shapePush(x,y,colour,shape);
+      };
+
+      if (game.currentState[x][y+1] === colour) {
+        y++;
+        shapePush(x,y,colour,shape);
+      };
+
+      if (game.currentState[x-1][y] === colour) {
+        x--;
+        shapePush(x,y,colour,shape);
+      };
+
+      if (game.currentState[x][y-1] === colour) {
+        y--;
+        shapePush(x,y,colour,shape);
+      };
+    }
 
     var shapePush = function (x,y,colour,shape) {
       shapes[shape].push(x + "_" + y);
-      findShapes(x,y,colour,shape);
+      game.findShapes(x,y,colour,shape);
     }
 
     if (typeof shape === 'undefined') {
-        var shape = one;
+        var shape = "one";
       }
 
     if (typeof shapes === 'undefined') {
@@ -86,44 +110,54 @@ var game = {
         four: []
       }
     };
+
     
     if (game.currentState[x+1][y] === colour) {
       x++;
-      shapePush(x,y,colour,shape);
+      shapePush(x,y,colour,"one");
     };
 
     if (game.currentState[x][y+1] === colour) {
       y++;
-      shapePush(x,y,colour,shape);
+      shapePush(x,y,colour,"two");
     };
 
     if (game.currentState[x-1][y] === colour) {
       x--;
-      shapePush(x,y,colour,shape);
+      shapePush(x,y,colour,"three");
     };
 
     if (game.currentState[x][y-1] === colour) {
       y--;
-      shapePush(x,y,colour,shape);
+      shapePush(x,y,colour,"four");
     };
-
+    
     return shapes;
     
   },
 
   findNecklaces: function(shapes) {
+        
+    var shapesToDelete = [],
+        necklaces = {
+          one: [],
+          two: [],
+          three: [],
+          four: []
+        };
 
     var processLiberties = function(position, shape) {
 
-      var x = position[0];
-      var y = position[1];
+      var x = Number(position[0]);
+      var y = Number(position[1]);
+
 
       if (game.currentState[x+1][y] === ".") {
         necklaces[shape].push(x+1 + "_" + y)
       };
 
       if (game.currentState[x][y+1] === ".") {
-        necklaces[shape].push(x + "_" + y+1)
+        necklaces[shape].push(x + "_" + (y+1))
       };
 
       if (game.currentState[x-1][y] === ".") {
@@ -131,24 +165,30 @@ var game = {
       };
 
       if (game.currentState[x][y-1] === ".") {
-        necklaces[shape].push(x + "_" + y-1)
+        necklaces[shape].push(x + "_" + (y-1))
       };
 
     };
-
-    var necklaces = {},
-        shapesToDelete = [];
-
+    //debugger;
     for (var shape in shapes) {
-      for (var i = 0; i < shape.length; i++) {
-        var position = shape[i].split("_");
-        processLiberties(position, shape);
-      };
 
-      if (necklaces[shape] === []) {
-        shapesToDelete.push(shape);
+      if (shapes[shape].length > 0) {
+
+        for (var i = 0; i < shapes[shape].length; i++) {
+          
+          var position = shapes[shape][i].split("_");
+          processLiberties(position, shape);
+        };
+        
+        if (necklaces[shape].length === 0) {
+          shapesToDelete.push(shape);
+          console.log(shapesToDelete);
+
+        };
       };
     };
+
+    console.log(shapesToDelete);
 
     return shapesToDelete;
   },
@@ -171,15 +211,19 @@ $(document).ready(function() {
   
   $(".item").click(function(){
     // console.log("Hello click");
+    var pos = $(this).data("position").split("_");
+
     if(black){
       $(this).append("<div class='black-marble'></div>");
       $(this).attr('data-content', 'b');
-      black = false;
+      black = false;     
+      game.processMove(pos[0]-1,pos[1]-1,"b");
     }
     else{
       $(this).append("<div class='white-marble'></div>");
       $(this).attr('data-content', 'w');
       black = true;
+      game.processMove(pos[0]-1,pos[1]-1,"w");
     }
   });
 
