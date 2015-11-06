@@ -25,11 +25,11 @@ body {
 
 #btn {
   display: inline-block;
-  line-height: 10vh;
+  line-height: 11vh;
   width: 19.25%;
   height: 10vh;
   text-align: center;
-  font-size: 9.20vh;
+  font-size: 8vh;
   background-color: grey;
   color: #000;
   border-radius: 5px;
@@ -37,6 +37,7 @@ body {
 #btn a {
   text-decoration: none;
   color: #000;
+  font-family: "Arial", sans-serif;
 }
 
 #scorewhite {

@@ -28,12 +28,12 @@ body{
 
 #btn{  
   display: inline-block;
-  line-height: 10vh;
+  line-height: 11vh;
   // padding-left: 1em;
   width: 19.25%;
   height: 10vh;
   text-align: center;
-  font-size: 9.20vh;
+  font-size: 8vh;
   background-color: grey;
   color: #000;
   border-radius: 5px;
@@ -41,6 +41,7 @@ body{
   a{
     text-decoration: none;
     color: #000;
+    font-family: "Arial", sans-serif;
   }
   // width: 50vw;
   // display: grid;
