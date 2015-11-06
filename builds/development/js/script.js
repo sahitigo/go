@@ -13195,25 +13195,29 @@ var game = {
 
   findShapes: function(x,y,colour,shape) {
     //var origin = [x][y];
+
+    var maxPos = game.currentState.length - 1;
     
     var shapeCrawler = function(x,y,colour,shape) {
+
       
-      if (game.currentState[x+1][y] === colour) {
+      
+      if (x < maxPos && game.currentState[x+1][y] === colour) {
         x++;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x][y+1] === colour) {
+      if (y < maxPos && game.currentState[x][y+1] === colour) {
         y++;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x-1][y] === colour) {
+      if (x > 0 && game.currentState[x-1][y] === colour) {
         x--;
         shapePush(x,y,colour,shape);
       };
 
-      if (game.currentState[x][y-1] === colour) {
+      if (y > 0 && game.currentState[x][y-1] === colour) {
         y--;
         shapePush(x,y,colour,shape);
       };
@@ -13240,30 +13244,25 @@ var game = {
         four: []
       }
     };
-
     
-    if (game.currentState[x+1][y] === colour) {
+    if (x < maxPos && game.currentState[x+1][y] === colour) {
       x++;
       shapePush(x,y,colour,"one");
-      //shapeCrawler(x,y,colour,"one");
     };
 
-    if (game.currentState[x][y+1] === colour) {
+    if (y < maxPos && game.currentState[x][y+1] === colour) {
       y++;
       shapePush(x,y,colour,"two");
-      //shapeCrawler(x,y,colour,"two");
     };
 
-    if (game.currentState[x-1][y] === colour) {
+    if (x > 0 && game.currentState[x-1][y] === colour) {
       x--;
       shapePush(x,y,colour,"three");
-      //shapeCrawler(x,y,colour,"three");
     };
 
-    if (game.currentState[x][y-1] === colour) {
+    if (y > 0 && game.currentState[x][y-1] === colour) {
       y--;
       shapePush(x,y,colour,"four");
-      //shapeCrawler(x,y,colour,"four");
     };
     
     return shapes;
@@ -13278,7 +13277,8 @@ var game = {
           two: [],
           three: [],
           four: []
-        };
+        },
+        maxPos = game.currentState.length - 1;
 
     var processLiberties = function(position, shape) {
 
@@ -13286,19 +13286,19 @@ var game = {
       var y = Number(position[1]);
 
 
-      if (game.currentState[x+1][y] === ".") {
+      if (x < maxPos && game.currentState[x+1][y] === ".") {
         necklaces[shape].push(x+1 + "_" + y)
       };
 
-      if (game.currentState[x][y+1] === ".") {
+      if (y < maxPos && game.currentState[x][y+1] === ".") {
         necklaces[shape].push(x + "_" + (y+1))
       };
 
-      if (game.currentState[x-1][y] === ".") {
+      if (x > 0 && game.currentState[x-1][y] === ".") {
         necklaces[shape].push(x-1 + "_" + y)
       };
 
-      if (game.currentState[x][y-1] === ".") {
+      if (y > 0 && game.currentState[x][y-1] === ".") {
         necklaces[shape].push(x + "_" + (y-1))
       };
 
