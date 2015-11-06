@@ -13332,6 +13332,13 @@ $(document).ready(function() {
   game.init();
 
   var black = true;
+
+  function timer(){
+    black = !black;
+    setTimeout(timer, 10000);
+  }
+
+
   
   $(".item").click(function(){
     // console.log("Hello click");
@@ -13349,6 +13356,7 @@ $(document).ready(function() {
       black = true;
       game.processMove(pos[0]-1,pos[1]-1,"w");
     }
+    timer();
   });
 
 });
