@@ -1,15 +1,40 @@
+body {
+  margin: 0;
+}
+
 .container {
-  border: 1px solid blue;
-  width: 90vh;
+  border: 10px solid #b69b4c;
+  margin: 3vmin auto;
+  width: 90vmin;
   display: grid;
-  grid-template-rows: repeat(9, 10vh);
-  grid-template-columns: repeat(9, 10vh);
+  grid-template-rows: repeat(9, 10vmin);
+  grid-template-columns: repeat(9, 10vmin);
 }
 
 .item {
   background: url("../images/lines.png");
-  width: 10vh;
-  height: 10vh;
+  width: 10vmin;
+  height: 10vmin;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.black-marble {
+  border-radius: 5vmin;
+  background-color: #000;
+  border: 1px solid #777;
+  height: 5vmin;
+  width: 5vmin;
+  margin-left: 2.5vh;
+  margin-top: 2.5vh;
+}
+
+.white-marble {
+  border-radius: 5vmin;
+  background-color: #fff;
+  border: 1px solid #777;
+  height: 5vmin;
+  width: 5vmin;
+  margin-left: 2.5vh;
+  margin-top: 2.5vh;
 }
