@@ -36,7 +36,7 @@ var game = {
     $(".container").html(divCnt);
   },
 
-  updateScore: function(black, white) {
+  updateScore: function(white, black) {
     game.blackScore += black;
     game.whiteScore += white;
     $("#scoreblack").html(game.blackScore);
