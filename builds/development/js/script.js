@@ -13150,7 +13150,7 @@ var game = {
       for (var j = 1; j <= gridSize; j++) {
         var str1 = "<div class='item' data-position=";
         var str2 = "></div>";
-        var str3 = " key=";
+        var str3 = " id=";
         var str4 = " data-content='.'";
         var key = i + "_" + j;
         var divData = str1 + key + str3 + key + str4 + str2;
@@ -13180,9 +13180,10 @@ var game = {
     if (shapes.one.length + shapes.two.length + shapes.three.length + shapes.four.length !== 0) {
             var shapesToDelete = game.findNecklaces(shapes);
 
-            if (shapesToDelete !== []) {
-              for (var shape in shapesToDelete) {
-                game.deleteShape(shapes[shape]);
+            if (shapesToDelete.length > 0) {
+              for (i=0; i < shapesToDelete.length; i++) {
+                
+                game.deleteShape(shapes[shapesToDelete[i]]);
               };      
             };
     };
@@ -13321,6 +13322,9 @@ var game = {
     for (var i = 0; i < shape.length; i++) {
       var pos = shape[i].split("_");
       game.updateCurrentState(pos[0],pos[1],".");
+      var id = "#" + (Number(pos[0])+1) + "_" + (Number(pos[1])+1);
+      console.log(id);
+      $(id).html("");
     };
   }
 
