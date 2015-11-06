@@ -100,7 +100,7 @@ var game = {
     }
 
     var shapePush = function (x,y,colour,shape) {
-      debugger;
+      // debugger;
       var pos = x + "_" + y;
       if (shapes[shape].indexOf(pos) === -1) {
         shapes[shape].push(pos);
@@ -221,11 +221,23 @@ $(document).ready(function() {
   game.init();
 
   var black = true;
+  
+  // var timeObject = new Date();
+  // var time = new Date(timeObject.getTime() + 10000);
 
-  function timer(){
-    black = !black;
-    setTimeout(timer, 10000);
-  }
+  // function timer(time){
+  //   $("#timer").countdown(time, function(event){
+  //     $(this).text(event.strftime('%S secs'));
+  //   })
+  //   .on('finish.countdown', function(event) {
+  //    timer(new Date(timeObject.getTime() + 10000)); 
+  //   });
+  // }
+
+  // function timer(){
+  //   black = !black;
+  //   setTimeout(timer, 10000);
+  // }
 
 
   
@@ -245,7 +257,7 @@ $(document).ready(function() {
       black = true;
       game.processMove(pos[0]-1,pos[1]-1,"w");
     }
-    timer();
+    // timer(new Date(timeObject.getTime() + 10000));
   });
 
 });
