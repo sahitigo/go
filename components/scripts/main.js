@@ -269,6 +269,9 @@ $(document).ready(function() {
   //   setTimeout(timer, 10000);
   // }
 
+  $("#btn").click(function(){
+    location.reload();
+  });
 
   
   $(".item").click(function(){
