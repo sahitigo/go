@@ -5,23 +5,31 @@ body {
 .container {
   border: 10px solid #b69b4c;
   margin: 0 auto;
-  width: 90vh;
-  height: 90vh;
+  width: 81vh;
+  height: 81vh;
   display: grid;
-  grid-template-rows: repeat(9, 10vh);
-  grid-template-columns: repeat(9, 10vh);
+  grid-template-rows: repeat(9, 9vh);
+  grid-template-columns: repeat(9, 9vh);
 }
 
 #scoreblack {
+  display: inline-block;
+  line-height: 10vh;
+  width: 49%;
+  height: 10vh;
   text-align: left;
-  font-size: 5vh;
+  font-size: 10vh;
   background-color: #fff;
   color: #444;
 }
 
 #scorewhite {
+  display: inline-block;
+  line-height: 10vh;
+  width: 49%;
+  height: 10vh;
   text-align: right;
-  font-size: 5vh;
+  font-size: 10vh;
   background-color: #444;
   color: #fff;
 }
@@ -32,28 +40,28 @@ body {
 
 .item {
   background: url("../images/lines.png");
-  width: 10vmin;
-  height: 10vmin;
+  width: 9vh;
+  height: 9vh;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .black-marble {
-  border-radius: 5vmin;
+  border-radius: 4vh;
   background-color: #000;
   border: 1px solid #777;
-  height: 5vmin;
-  width: 5vmin;
+  height: 4vh;
+  width: 4vh;
   margin-left: 2.5vh;
   margin-top: 2.5vh;
 }
 
 .white-marble {
-  border-radius: 5vmin;
+  border-radius: 4vh;
   background-color: #fff;
   border: 1px solid #777;
-  height: 5vmin;
-  width: 5vmin;
+  height: 4vh;
+  width: 4vh;
   margin-left: 2.5vh;
   margin-top: 2.5vh;
 }
