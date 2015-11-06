@@ -4,11 +4,30 @@ body {
 
 .container {
   border: 10px solid #b69b4c;
-  margin: 3vmin auto;
-  width: 90vmin;
+  margin: 0 auto;
+  width: 90vh;
+  height: 90vh;
   display: grid;
-  grid-template-rows: repeat(9, 10vmin);
-  grid-template-columns: repeat(9, 10vmin);
+  grid-template-rows: repeat(9, 10vh);
+  grid-template-columns: repeat(9, 10vh);
+}
+
+#scoreblack {
+  text-align: left;
+  font-size: 5vh;
+  background-color: #fff;
+  color: #444;
+}
+
+#scorewhite {
+  text-align: right;
+  font-size: 5vh;
+  background-color: #444;
+  color: #fff;
+}
+
+.timer {
+  display: inline-block;
 }
 
 .item {

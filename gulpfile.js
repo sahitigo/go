@@ -42,10 +42,13 @@ bowerDir = 'bower_components/' ;
 //coffeeSources = ['components/coffee/*.coffee'];
 jsSources = [
 	bowerDir + 'jquery/dist/jquery.js',
+	bowerDir + 'jquery.countdown/dist/jquery.countdown.js',
 	bowerDir + 'bootstrap-sass/assets/javascripts/bootstrap.js',
 	bowerDir + 'underscore/underscore.js',		
 	'components/scripts/*.js'];
-sassSources = ['components/sass/main.scss'];
+sassSources = [
+	'components/sass/main.scss',
+	bowerDir + 'bootstrap-sass/assets/stylesheets'];
 htmlSources = [outputDir + '*.html'];
 jsonSources = [outputDir + 'js/*.json'];
 

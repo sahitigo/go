@@ -237,7 +237,7 @@ var game = {
       $(id).html("");
       
       // Update Score
-      colour === "w" ? game.updateScore(0,1) : game.updateScore(1,0);
+      colour === "w" ? game.updateScore(-1,0) : game.updateScore(0,-1);
       
 
     };
@@ -251,6 +251,25 @@ $(document).ready(function() {
   game.init();
 
   var black = true;
+  
+  // var timeObject = new Date();
+  // var time = new Date(timeObject.getTime() + 10000);
+
+  // function timer(time){
+  //   $("#timer").countdown(time, function(event){
+  //     $(this).text(event.strftime('%S secs'));
+  //   })
+  //   .on('finish.countdown', function(event) {
+  //    timer(new Date(timeObject.getTime() + 10000)); 
+  //   });
+  // }
+
+  // function timer(){
+  //   black = !black;
+  //   setTimeout(timer, 10000);
+  // }
+
+
   
   $(".item").click(function(){
     
@@ -268,6 +287,7 @@ $(document).ready(function() {
       black = true;
       game.processMove(pos[0]-1,pos[1]-1,"w");
     }
+    // timer(new Date(timeObject.getTime() + 10000));
   });
 
 });
