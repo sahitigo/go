@@ -13124,8 +13124,10 @@ if (typeof jQuery === 'undefined') {
 
 var game = {
 
+  currentState: [],
+
   init: function(size) {
-    game.CurrentState = game.initialState(size);
+    game.currentState = game.initialState(size);
     console.log(game.CurrentState);
   },
 
@@ -13137,7 +13139,27 @@ var game = {
       });
     });
     return grid;
+  },
+
+  processMove: function(x,y,colour) {
+
+    game.updateCurrentState(x,y,colour);
+
+    var shapes = game.findShapes(x,y,colour);
+    
+    if (shapes) {
+      var necklaces = game.findNecklace(shapes);
+      if (necklaces) {
+        game.deleteShapes(necklaces);
+      }
+    }
+  },
+
+  updateCurrentState: function(x,y,colour) {
+    game.currentState[x][y] = colour;
   }
+
+
 }
 
 
